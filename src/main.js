@@ -2,7 +2,7 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-
+import {chooseCurrency} from './js/currency.js';
 
 
 $(document).ready(function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
     request.send();
 
   function getElements(response) {
-      $('.pln').html(`${response.conversion_rates.PLN}`);
+      $('.pln').html(`${response.conversion_rates.$(chooseCurrency)}`);
     }
   });
 });

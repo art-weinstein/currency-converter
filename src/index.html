@@ -8,12 +8,20 @@
     <h1>Choose your conversion!</h1>
     <label for="currency">Enter a currency:</label>
     <input id="currency" type="text">
+    <!-- alternate currency method -->
+    <label for="Currency">Please select a currency!:</label>
+    <select name="currency" id="currency">
+      <option value="PLN">Poland</option>
+      <option value="AED"></option>
+      <option value="AZN"></option>
+      <option value="BWP"></option>
+    </select>
     <label for="amount">Enter an amount:</label>
     <input id="amount" type="text">
     <button class="btn-success" id="convert">Convert</button>
     <div id= "convertedAmount"></div>
     <!-- <div class = showErrors></div> -->
-    <!-- <div id = "displayError"></div> -->
+      <div id = "displayError">Please enter a valid input!</div>
   </div>
 </body>
 </html>

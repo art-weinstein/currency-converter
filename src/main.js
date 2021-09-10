@@ -41,7 +41,8 @@ $(document).ready(function() {
     let promise = Conversion.convertCurrency();
     promise.then(function(response) {
       const body = JSON.parse(response);
-      $('#convertedAmount').html(`${dollar} dollar in ${currency} comes out to ${body.conversion_rates[currency] * dollar}`);
+      $('#convertedAmount').html(`${dollar} dollars in ${currency} comes out to ${body.conversion_rates[currency] * dollar}`);
+      // $('#displayError').hide();
     }, function(error) {
       $('.showErrors').html(`There was an error processing your request: ${error}`);
     });
@@ -52,10 +53,14 @@ $(document).ready(function() {
         throw RangeError("No valid entry");
       } else {
         console.log("Try was successful, no need to catch.");
+        $('#convertedAmount').show();
+        $('#displayError').hide();
       }
     } catch(error){
       console.error(`Red alert! There's an error! ${error.message}`);
-      $('#convertedAmount').html("Please enter valid input in both fields!");
+      // $('#displayError').html
+      $('#displayError').show();
+      $("#convertedAmount").hide();
 
     }
   });

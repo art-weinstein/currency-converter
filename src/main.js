@@ -7,7 +7,7 @@ import './css/styles.css';
 
 $(document).ready(function() {
   $('#convert').click(function() {
-    const currency = $('#currency').val();
+    // const currency = $('#currency').val();
 
     let request = new XMLHttpRequest();
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/latest/USD`;
@@ -23,7 +23,7 @@ $(document).ready(function() {
     request.send();
 
   function getElements(response) {
-      $('.pln').html(``);
+      $('.pln').html(`${response.conversion_rates.PLN}`);
     }
   });
 });

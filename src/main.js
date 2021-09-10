@@ -61,7 +61,6 @@ $(document).ready(function() {
       // $('#displayError').html
       $('#displayError').show();
       $("#convertedAmount").hide();
-
     }
   });
 });

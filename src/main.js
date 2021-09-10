@@ -4,9 +4,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import Conversion from './currency.js';
 
+// function checkInput(dollar){
+//   if (dollar <= 0){
+//     return new Error("Please enter an amount!");
+//   } else {
+//     return true;
+//   }
+// }
+
+// function displayExchange(response, dollar, currency) {
+//   if (response.result != 'success') {
+//     $('#convertedAmount').text(`There was an error: ${response.message}`);
+//   } else if (!currency) {
+//     $('#convertedAmount').text('Please select a currency in first box');
+//   } else if (dollar === '') {
+//     $('#convetedAmount').text('Please select USD amount in second box');
+//   } else if (response.result === 'success') {
+//     $('#convetedAmount').text(`${dollar} in ${currency}: ${response.conversion_rates[currency]*dollar}`); 
+//   } else {
+//     $('#convertedAmount').text(`There was an unhandled error!`);
+//   }
+// }
+
 function checkInput(dollar){
-  if (dollar <= 0){
-    return new Error("Please enter an amount!");
+  if (dollar <=0 || dollar === ""){
+    return new Error("Please enter valid input in both fields!")
   } else {
     return true;
   }
@@ -21,19 +43,34 @@ $(document).ready(function() {
       const body = JSON.parse(response);
       $('#convertedAmount').html(`${dollar} dollar in ${currency} comes out to ${body.conversion_rates[currency] * dollar}`);
     }, function(error) {
-      $('.showErrors').text(`There was an error processing your request: ${error}`);
+      $('.showErrors').html(`There was an error processing your request: ${error}`);
     });
-  });
-  try {
-    const isInputValid = checkInput();
-    if (isInputValid instanceof Error){
-      console.error(isInputValid.message)
-      throw RangeError("Please enter an amount!");
-    } else {
-      console.log("Try was successful, no need to catch.");
+    try {
+      const isInputValid = checkInput(dollar);
+      if (isInputValid instanceof Error){
+        console.error(isInputValid.message)
+        throw RangeError("No valid entry");
+      } else {
+        console.log("Try was successful, no need to catch.");
+      }
+    } catch(error){
+      console.error(`Red alert! There's an error! ${error.message}`);
+      $('#convertedAmount').html("Please enter valid input in both fields!");
+
     }
-  } catch(error){
-    console.error(`Red alert! There's an error! ${error.message}`);
-    $('#convertedAmount').text("Please enter an amount!");
-  }
+  });
 });
+
+
+
+
+// $(document).ready(function() {
+//   $('#convert').click(function() {
+//     let dollar = $('#amount').val();
+//     let currency = $("#currency").val();
+//     Conversion.convertCurrency()
+//       .then(function(response) {
+//         displayExchange(response, dollar, currency);
+//       });
+//   });
+// });
